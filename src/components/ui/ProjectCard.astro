@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  tag?: string;
+}
+
+const { title, description, tag } = Astro.props;
+---
+
+<article
+  class="group h-full rounded-2xl border border-slate-700/70 bg-slate-900/65 p-5 shadow-lg shadow-slate-950/40 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:border-sky-400/50 hover:shadow-sky-500/20"
+>
+  <div class="mb-3 flex items-center justify-between gap-3">
+    <h3 class="text-lg font-semibold text-slate-100">{title}</h3>
+    {tag && (
+      <span class="rounded-full border border-slate-700 px-2 py-1 text-xs text-slate-300 transition group-hover:border-sky-400/50 group-hover:text-sky-200">
+        {tag}
+      </span>
+    )}
+  </div>
+  <p class="text-sm leading-relaxed text-slate-400">{description}</p>
+</article>

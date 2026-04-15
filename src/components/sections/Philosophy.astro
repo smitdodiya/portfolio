@@ -1,0 +1,20 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+
+const points = [
+  "I focus on understanding how things work internally rather than only using tools at surface level.",
+  "I enjoy exploring architecture and system design to make software resilient, maintainable, and scalable.",
+  "My goal is to become a high-level engineer who solves problems with clarity, depth, and long-term thinking.",
+];
+---
+
+<section id="philosophy" class="section-base reveal" style="--reveal-delay: 0.12s;">
+  <SectionHeading title="Approach / Philosophy" subtitle="How I think as a developer" />
+  <div class="grid gap-4 md:grid-cols-3">
+    {points.map((point) => (
+      <article class="rounded-2xl border border-slate-700/70 bg-slate-900/60 p-5 shadow-lg shadow-slate-950/40 backdrop-blur-sm transition duration-300 hover:border-sky-400/40">
+        <p class="text-sm leading-relaxed text-slate-300">{point}</p>
+      </article>
+    ))}
+  </div>
+</section>

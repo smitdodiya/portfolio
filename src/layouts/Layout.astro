@@ -1,0 +1,73 @@
+---
+import "../styles/global.css";
+
+const navItems = [
+  { href: "#hero", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#philosophy", label: "Approach" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/jpeg" href="/smit.jpeg" />
+    <meta
+      name="description"
+      content="Portfolio of Smit Dodiya, Software Developer Intern at Improwised Technologies."
+    />
+    <title>Smit Dodiya | Portfolio</title>
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-sky-400/30">
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div class="background-gradient-one"></div>
+      <div class="background-gradient-two"></div>
+      <div class="background-noise"></div>
+    </div>
+    <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur">
+      <nav class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <a href="#hero" class="text-sm font-semibold tracking-wide text-slate-100 transition hover:text-sky-300">
+          SMIT DODIYA
+        </a>
+        <ul class="flex flex-wrap items-center justify-end gap-2 text-sm sm:gap-3">
+          {navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="rounded-md px-2 py-1 text-slate-300 transition duration-200 hover:bg-slate-800 hover:text-sky-300"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+
+    <main class="mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6 sm:pt-10 lg:px-8">
+      <slot />
+    </main>
+
+    <script is:inline>
+      const sections = Array.from(document.querySelectorAll(".reveal"));
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("reveal-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+      );
+      sections.forEach((section) => observer.observe(section));
+    </script>
+  </body>
+</html>

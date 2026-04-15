@@ -1,0 +1,38 @@
+---
+import CTAButton from "../ui/CTAButton.astro";
+---
+
+<section id="hero" class="section-base reveal" style="--reveal-delay: 0.05s;">
+  <div class="grid items-center gap-8 lg:grid-cols-[1.4fr_1fr]">
+    <div>
+      <p class="mb-3 inline-flex rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1 text-xs text-sky-200 shadow-sm shadow-slate-950/40 backdrop-blur-sm">
+        Software Developer Intern at Improwised Technologies
+      </p>
+      <h1 class="max-w-3xl text-3xl font-bold leading-tight tracking-tight text-slate-100 sm:text-5xl">
+        Smit Dodiya
+      </h1>
+      <p class="mt-3 max-w-2xl text-sm text-slate-400 sm:text-base">
+        Focused on modern web systems, performance, and clean architecture.
+      </p>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
+        Building modern web applications and exploring system design deeply
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <CTAButton href="#projects" label="View Projects" />
+        <CTAButton href="#contact" label="Contact Me" variant="secondary" />
+      </div>
+    </div>
+
+    <div class="mx-auto w-full max-w-xs lg:mx-0 lg:justify-self-end">
+      <img
+        src="/smit2.png"
+        alt="Profile photo of Smit Dodiya"
+        width="520"
+        height="520"
+        loading="eager"
+        decoding="async"
+        class="w-full object-contain"
+      />
+    </div>
+  </div>
+</section>

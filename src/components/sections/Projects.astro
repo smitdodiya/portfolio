@@ -1,0 +1,28 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import ProjectCard from "../ui/ProjectCard.astro";
+
+const projects = [
+  {
+    title: "JovVix",
+    tag: "Open Source Project",
+    description:
+      "An open-source project focused on UI experimentation and architecture exploration, built to test design ideas and implementation patterns.",
+  },
+  {
+    title: "Quiz App",
+    tag: "Web App",
+    description:
+      "An interactive quiz platform designed with strong attention to user experience, smooth transitions, and engaging flow.",
+  },
+];
+---
+
+<section id="projects" class="section-base reveal" style="--reveal-delay: 0.14s;">
+  <SectionHeading title="Projects" subtitle="Selected work and ongoing explorations" />
+  <div class="grid gap-5 md:grid-cols-2">
+    {projects.map((project) => (
+      <ProjectCard title={project.title} description={project.description} tag={project.tag} />
+    ))}
+  </div>
+</section>

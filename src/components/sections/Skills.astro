@@ -1,0 +1,44 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import Tag from "../ui/Tag.astro";
+
+const skillGroups = [
+  {
+    category: "Frontend",
+    icon: "⚛",
+    items: ["Astro", "Svelte", "Vue", "Nuxt", "Tailwind CSS", "TypeScript", "JavaScript", "HTML/CSS"],
+  },
+  {
+    category: "Backend",
+    icon: "⚙",
+    items: ["Go (Golang)", "REST APIs"],
+  },
+  {
+    category: "Database",
+    icon: "🗄",
+    items: ["PostgreSQL"],
+  },
+  {
+    category: "DevOps / Tools",
+    icon: "🛠",
+    items: ["Containers", "Docker", "Git", "GitHub", "VS Code", "Linux", "Responsive Design"],
+  },
+];
+---
+
+<section id="skills" class="section-base reveal" style="--reveal-delay: 0.1s;">
+  <SectionHeading title="Skills" subtitle="Technologies and practices I rely on" />
+  <div class="grid gap-4 sm:grid-cols-2">
+    {skillGroups.map((group) => (
+      <article class="rounded-2xl border border-slate-700/70 bg-slate-900/60 p-5 shadow-lg shadow-slate-950/40 backdrop-blur-sm transition duration-300 hover:border-sky-400/50 hover:shadow-sky-500/20">
+        <h3 class="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-sky-200">
+          <span class="inline-flex h-6 w-6 items-center justify-center rounded-md border border-slate-700 bg-slate-800/80 text-xs">{group.icon}</span>
+          {group.category}
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          {group.items.map((item) => <Tag text={item} />)}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
