@@ -25,7 +25,7 @@ const contacts = [
 
 <section id="contact" class="section-base reveal" style="--reveal-delay: 0.2s;">
   <SectionHeading title="Contact" subtitle="Let us connect and build something meaningful" />
-  <div class="rounded-2xl border border-slate-700/70 bg-slate-900/60 p-5 shadow-xl shadow-slate-950/40 backdrop-blur-sm sm:p-6">
+  <div class="interactive-card rounded-2xl border border-slate-700/70 bg-slate-900/60 p-5 shadow-xl shadow-slate-950/40 backdrop-blur-sm sm:p-6">
     <p class="mb-5 text-sm leading-relaxed text-slate-300 sm:text-base">
       I am always open to discussing product ideas, engineering challenges, and collaborative opportunities.
     </p>
@@ -36,7 +36,7 @@ const contacts = [
           href={contact.href}
           target={contact.label === "Email" ? undefined : "_blank"}
           rel={contact.label === "Email" ? undefined : "noreferrer"}
-          class="group flex items-center gap-3 rounded-xl border border-slate-700/70 bg-slate-900/80 px-3 py-3 shadow-sm shadow-slate-950/30 transition duration-300 hover:-translate-y-0.5 hover:border-sky-400/60 hover:bg-slate-800/70"
+          class="interactive-card group flex items-center gap-3 rounded-xl border border-slate-700/70 bg-slate-900/80 px-3 py-3 shadow-sm shadow-slate-950/30 hover:bg-slate-800/70"
         >
           <span class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-slate-700 bg-slate-800/80 text-xs font-semibold text-sky-200">
             {contact.icon}
