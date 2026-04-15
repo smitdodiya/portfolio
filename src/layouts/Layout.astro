@@ -26,21 +26,46 @@ const navItems = [
   </head>
   <body class="bg-slate-950 text-slate-100 antialiased selection:bg-sky-400/30">
     <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <div class="background-gradient-one"></div>
-      <div class="background-gradient-two"></div>
+      <div class="background-base"></div>
+      <div class="background-glow"></div>
+      <div class="background-grid"></div>
       <div class="background-noise"></div>
+      <div class="background-vignette"></div>
     </div>
-    <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur">
+    <header class="header-shell sticky top-0 z-50 border-b border-slate-700/70 bg-slate-950/85 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/70">
       <nav class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <a href="#hero" class="text-sm font-semibold tracking-wide text-slate-100 transition hover:text-sky-300">
-          SMIT DODIYA
+        <a href="#hero" class="brand-link group inline-flex items-center gap-2.5 sm:gap-3" aria-label="Smit Dodiya home">
+          <span class="brand-logo" aria-hidden="true">
+            <span class="brand-logo-glyph">&gt;_</span>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-name">Smit Dodiya</span>
+            <span class="brand-tag">Software Developer</span>
+          </span>
         </a>
-        <ul class="flex flex-wrap items-center justify-end gap-2 text-sm sm:gap-3">
+
+        <button
+          id="mobile-menu-button"
+          type="button"
+          aria-expanded="false"
+          aria-label="Open menu"
+          aria-controls="mobile-menu"
+          class="menu-toggle inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-900/70 text-slate-200 transition hover:border-sky-400/60 hover:text-sky-200 md:hidden"
+        >
+          <svg class="menu-toggle-icon menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg class="menu-toggle-icon close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+
+        <ul class="hidden items-center justify-end gap-2 text-sm sm:gap-3 md:flex">
           {navItems.map((item) => (
             <li>
               <a
                 href={item.href}
-                class="rounded-md px-2 py-1 text-slate-300 transition duration-200 hover:bg-slate-800 hover:text-sky-300"
+                class="site-nav-link rounded-md px-3 py-1.5 text-slate-300 transition duration-200 hover:text-sky-300"
               >
                 {item.label}
               </a>
@@ -48,13 +73,56 @@ const navItems = [
           ))}
         </ul>
       </nav>
+
+      <div id="mobile-menu" class="hidden border-t border-slate-800/80 bg-slate-950/95 md:hidden">
+        <ul class="mx-auto flex w-full max-w-6xl flex-col gap-1 px-4 py-3 sm:px-6">
+          {navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="mobile-nav-link block rounded-lg border border-transparent px-3 py-2 text-sm text-slate-300 transition duration-200 hover:border-sky-400/50 hover:bg-slate-900/70 hover:text-sky-200"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
 
-    <main class="mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6 sm:pt-10 lg:px-8">
+    <main class="mx-auto w-full max-w-6xl px-4 pb-16 pt-3 sm:px-6 sm:pt-5 lg:px-8">
       <slot />
     </main>
 
     <script is:inline>
+      const menuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      const setMenuState = (isOpen) => {
+        if (!menuButton || !mobileMenu) return;
+        mobileMenu.classList.toggle("hidden", !isOpen);
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+        menuButton.classList.toggle("is-open", isOpen);
+      };
+
+      if (menuButton && mobileMenu) {
+        menuButton.addEventListener("click", () => {
+          const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+          setMenuState(!isOpen);
+        });
+
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => setMenuState(false));
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 768) {
+            setMenuState(false);
+          }
+        });
+      }
+
       const sections = Array.from(document.querySelectorAll(".reveal"));
       const observer = new IntersectionObserver(
         (entries) => {
